@@ -59,7 +59,10 @@ async def gen_token(form_data: OAuth2PasswordRequestForm = Depends()):
     return {"access_token": token, "token_type":"Bearer"}
 
 
-@testApp.get('/')
+
+
+
+@testApp.get('/see_token')
 async def index(token: str = Depends(oauth2_scheme)):
     return {'the_token' : token}
 
@@ -67,6 +70,8 @@ async def index(token: str = Depends(oauth2_scheme)):
 async def home(token: str = Depends(oauth2_scheme)):
     print(token)
     return {"Homepage":"here", "Token_data":token}
+    
+
 
 @testApp.get("/users", response_model=List[User_Pydantic])
 async def get_users():
